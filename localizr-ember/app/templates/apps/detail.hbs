@@ -1,0 +1,11 @@
+<div style='border:3px solid blue;margin:5px;'>
+  <h3>Languages</h3>
+  <ul>
+    {{#each model.languages as |language|}}
+      <li>
+        {{#link-to 'apps.detail.language' model.id language.id}}{{language.code}}{{/link-to}}
+      </li>
+    {{/each}}
+  </ul>
+  {{outlet}}
+</div>

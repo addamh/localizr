@@ -17,7 +17,7 @@ export default Ember.Controller.extend({
 
         window.saveAs(new Blob([vkbeautify.json(JSON.stringify(data))], {type: 'application/json'}), this.get('model').get('code') + '.json');
       } else if (format === 'xml'){
-        var xml = '<?xml version="1.0" encoding="utf-8"?>' + JXON.jsToString({resources: { string: _.map(this.get('model.localized_strings.currentState'), function(x){ return {"@name": x._data.string_key, "keyValue":x._data.string_value}; }) }}) + "</xml>";
+        var xml = '<?xml version="1.0" encoding="utf-8"?>' + JXON.jsToString({resources: { string: _.map(this.get('model.localized_strings.currentState'), function(x){ return {"@name": x._data.string_key, "keyValue":x._data.string_value}; }) }});
         window.saveAs(new Blob([vkbeautify.xml(xml)], {type: 'application/xml'}), this.get('model').get('code') + '.xml');
       } else if (format === 'php'){
         var php = "<?php \n";

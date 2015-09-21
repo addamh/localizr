@@ -2,6 +2,7 @@
   "name": "localizr-ember",
   "dependencies": {
     "bootstrap-sass": "~3.3.5",
+    "Chart.js": "chartjs#~1.0.2",
     "ember": "1.13.7",
     "ember-cli-shims": "ember-cli/ember-cli-shims#0.0.3",
     "ember-cli-test-loader": "ember-cli-test-loader#0.1.3",
@@ -14,8 +15,14 @@
     "jquery": "^1.11.3",
     "jxon": "~1.5.4",
     "loader.js": "ember-cli/loader.js#3.2.1",
+    "metisMenu": "~2.1.0",
     "qunit": "~1.18.0",
+    "sweetalert": "~1.1.0",
     "underscore": "~1.8.3",
-    "vkBeautify": "vkbeautify#*"
+    "vkBeautify": "vkbeautify#*",
+    "world-flags-sprite": "*"
+  },
+  "resolutions": {
+    "jquery": "^1.11.3"
   }
 }

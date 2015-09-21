@@ -1,0 +1,60 @@
+<div class='row'>
+  <div class="col-lg-7">
+    <h2>{{#if model.primary}}<span style="margin-left:5px; color:RGBA(249, 220, 0, 1);" class="fa fa-star"></span>{{/if}} {{app.name}} :: {{language-name model.code}} / {{language-name-native model.code}}</h2>
+  </div>
+  <div class="col-lg-5">
+    <button style='float: right;margin-top: 20px;margin-bottom: 10px;' {{action 'delete'}} type="submit" class="btn btn-danger">Delete</button>
+    {{#unless model.primary}}<button style='float: right;margin-top: 20px;margin-bottom: 10px;margin-right: 10px;' {{action 'makePrimary'}} type="submit" class="btn btn-warning">Make Primary</button>{{/unless}}
+    <button style='float: right;margin-top: 20px;margin-bottom: 10px;margin-right: 10px;' {{action 'uploadFile'}} type="submit" class="btn btn-primary">Upload</button>
+    <div style='float: right;margin-top: 20px;margin-bottom: 10px;margin-right: 10px;' class="btn-group">
+      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Export <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li {{action 'export' 'json'}}><a href="#">JSON</a></li>
+        <li {{action 'export' 'xml'}}><a href="#">XML</a></li>
+        <li {{action 'export' 'php'}}><a href="#">PHP</a></li>
+        <li {{action 'export' 'ios'}}><a href="#">iOS</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+  <h3>{{percentComplete}}% Complete</h3>
+  <div class="progress" style="border: 1px solid #ddd;">
+    <div class="progress-bar {{progress-bar-color percentComplete}} progress-bar-striped" role="progressbar" aria-valuenow="{{percentComplete}}" aria-valuemin="0" aria-valuemax="100" style="width: {{percentComplete}}%">
+      <span class="sr-only">{{percentComplete}}% Complete</span>
+    </div>
+  </div>
+  <div class='row'>
+    <div class='columns col-md-12'>
+      <div class="form-group">
+        {{input value=newKey enter='newString' placeholder="Add New Key" class='form-control'}}
+      </div>
+    </div>
+  </div>
+  <hr/>
+
+{{#if model.localized_strings}}
+  <div class='columns col-md-5 panel' style='padding: 15px;'>
+    <table class="table table-striped">
+      <thead>
+        <tr><td>Key</td><td>Value</td></tr>
+      </thead>
+      <tbody>
+          {{#each model.localized_strings as |string|}}
+            <tr>
+              <td>{{#link-to 'apps.language.string' string.id}}{{string.string_key}}{{/link-to}}</td>
+              <td>{{#if string.string_value}}{{string.string_value}}{{else}}<span class='label label-danger'><i class='fa fa-question'></i></span>{{/if}}</td>
+            </tr>
+          {{/each}}
+      </tbody>
+    </table>
+  </div>
+    {{else}}
+      <div class='columns col-md-12 text-center'>
+        <h1>No Strings</h1>
+      </div>
+  {{/if}}
+  <div class='columns col-md-7'>
+    {{outlet}}
+  </div>

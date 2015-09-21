@@ -1,4 +1,48 @@
-<div style='border:3px solid green;margin:5px;'>
+<div id="wrapper">
+  <nav class="navbar-default navbar-static-side pace-done" role="navigation">
+    <div class="sidebar-collapse">
+      <ul class="nav metismenu" id="side-menu">
+        <li class="nav-header">
+
+          <span class="clear">
+            <span class="block m-t-xs text-center">
+              <strong class="font-bold">
+                {{#link-to 'apps'}}<h3 style='color:#FFF;'>Localizr</h3>{{/link-to}}
+              </strong>
+            </span>
+          </span>
+        </li>
+        <li>
+          <a href='#'><i class="fa fa-plus-circle"></i>Add New App<span class="fa arrow"></span></a>
+          <ul class='nav nav-second-level collapse '>
+            <li class='text-center'>{{input value=newApp enter='newApp' placeholder='App Name'}}</li>
+          </ul>
+        </li>
+        {{#each model as |app|}}
+          <li>
+            {{#link-to 'apps.detail' app.id}}<i class="fa fa-sitemap"></i>
+              <span class="nav-label">{{app.name}}</span>
+              <span class="fa arrow"></span>
+            {{/link-to}}
+            <ul class="nav nav-second-level collapse f16">
+              {{#each app.languages as |language|}}
+                <li>
+                  {{#link-to 'apps.language' app.id language.id}}<i class='flag {{language.country_code}}'></i>{{language-name language.code}}{{#if language.primary}}<span style="margin-left:5px; color:RGBA(249, 220, 0, 1);" class="fa fa-star"></span>{{/if}}{{/link-to}}
+                </li>
+              {{/each}}
+            </ul>
+          </li>
+        {{/each}}
+      </ul>
+    </div>
+  </nav>
+
+  <div id="page-wrapper" class="gray-bg dashbard-1">
+    {{outlet}}
+  </div>
+</div>
+
+<!-- <div style='border:3px solid green;margin:5px;'>
   <h3>Apps</h3>
   <ul>
   {{#each model as |app|}}
@@ -11,4 +55,4 @@
   <h5>Add New App</h5>
   {{input value=newApp enter='newApp'}}
   {{outlet}}
-</div>
+</div> -->

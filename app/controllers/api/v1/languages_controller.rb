@@ -1,31 +1,29 @@
 class Api::V1::LanguagesController < ApplicationController
   before_action :set_language, only: [:show, :edit, :update, :destroy]
 
-  # GET /stuffs
-  # GET /stuffs.json
   def index
     @language = Language.all
   end
 
-  # GET /stuffs/1
-  # GET /stuffs/1.json
   def show
     render json: @language
   end
 
-  # GET /stuffs/new
   def new
     @language = Language.new
   end
 
-  # GET /stuffs/1/edit
   def edit
   end
 
-  # POST /stuffs
-  # POST /stuffs.json
   def create
     @language = Language.new(language_params)
+    @current_primary = Language.where(app_id: language_params[:app_id], primary: true).first
+    if @current_primary
+      @current_primary.localized_strings.each do |s|
+        @language.localized_strings << LocalizedString.new({string_key: s.string_key, notes: s.notes})
+      end
+    end
 
     respond_to do |format|
       if @language.save
@@ -36,11 +34,13 @@ class Api::V1::LanguagesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /stuffs/1
-  # PATCH/PUT /stuffs/1.json
   def update
     respond_to do |format|
-      if @language.update(localized_strings_params)
+      @current_primary = Language.where(app_id: language_params[:app_id], primary: true).first
+      @current_primary.primary = false
+
+      if @language.update(language_params)
+        @current_primary.save
         format.json { render json: @language, status: :ok }
       else
         format.json { render json: @language.errors, status: :unprocessable_entity }
@@ -48,8 +48,6 @@ class Api::V1::LanguagesController < ApplicationController
     end
   end
 
-  # DELETE /stuffs/1
-  # DELETE /stuffs/1.json
   def destroy
     @language.destroy
     respond_to do |format|
@@ -64,6 +62,6 @@ class Api::V1::LanguagesController < ApplicationController
     end
 
     def language_params
-      params.require(:language).permit(:code, :app_id)
+      params.require(:language).permit(:code, :app_id, :primary, :country_code)
     end
 end

@@ -1,1 +1,20 @@
 @import "bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+@import "animate";
+@import "style";
+
+.app-box {
+  @extend .contact-box;
+  ul {
+    padding-left: 0;
+    margin-top: 10px;
+    list-style: none;
+    li {
+      display: inline-block;
+    }
+  }
+}
+
+#page-wrapper {
+  padding-top: 5px;
+  height: 100%;
+}

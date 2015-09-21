@@ -7,10 +7,9 @@ var Router = Ember.Router.extend({
 
 Router.map(function() {
   this.route('apps', { path: '/apps' }, function () {
-    this.route("detail", { path: "/:app_id" }, function() {
-      this.route('language', { path: '/language/:language_id' }, function() {
-        this.route('string', { path: '/string/:string_id' });
-      });
+    this.route("detail", { path: "/:app_id" });
+    this.route('language', { path: '/:app_id/language/:language_id' }, function() {
+      this.route('string', { path: '/string/:string_id' });
     });
   });
 });

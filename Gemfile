@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
 gem 'active_model_serializers'
+gem 'pry'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 # Use CoffeeScript for .coffee assets and views

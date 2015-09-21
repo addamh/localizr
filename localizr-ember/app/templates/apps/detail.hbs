@@ -1,14 +1,40 @@
-<div style='border:3px solid blue;margin:5px;'>
-  <h3>Languages</h3>
-  <ul>
-    {{#each model.languages as |language|}}
-      <li>
-        {{#link-to 'apps.detail.language' model.id language.id}}{{language.code}}{{/link-to}}
-      </li>
-    {{/each}}
-  </ul>
-  <hr/>
-  <h5>Add New Language</h5>
-  {{input value=newLanguage enter='newLanguage'}}
-  {{outlet}}
+<div class='row'>
+  <div class="col-lg-9">
+    <h2>{{model.name}}</h2>
+  </div>
+  <div class="col-lg-3">
+    <button style='float: right;margin-top: 20px;margin-bottom: 10px;' {{action 'delete'}} type="submit" class="btn btn-danger">Delete</button>
+  </div>
 </div>
+
+<div class='col-md-12'>
+  {{input value=newLanguage enter='newLanguage' class='form-control' placeholder='Add New Language'}}
+</div>
+<hr/>
+{{#if model.languages}}
+  <div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+      {{#each model.languages as |language|}}
+        <div class="col-lg-4">
+            {{#link-to 'apps.language' model.id language.id}}
+              <div style='height: 150px;' class='app-box f32 clearfix'>
+                <div class="col-md-6">
+                  <i class='flag {{language.country_code}}'></i>
+                  <h4>{{language-name language.code}} {{#if language.primary}}<span style="margin-left:5px; color:RGBA(249, 220, 0, 1);" class="fa fa-star"></span>{{/if}}</h4>
+                  Strings: {{language.localized_strings.length}}
+                  Complete: {{language.percentComplete}}%
+                </div>
+                <div class="col-md-6 text-center">
+                  <canvas id="{{language.chartId}}" height="200">{{pie-chart elementId=language.chartId percent=language.percentComplete}}</canvas>
+                </div>
+              </div>
+            {{/link-to}}
+        </div>
+      {{/each}}
+    </div>
+  </div>
+{{else}}
+  <div class='columns col-md-12 text-center'>
+    <h1>No Languages</h1>
+  </div>
+{{/if}}

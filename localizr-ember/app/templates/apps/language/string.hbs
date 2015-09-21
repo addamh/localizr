@@ -1,0 +1,25 @@
+<div class='panel' style='padding: 15px;'>
+  {{#if model.hasDirtyAttributes}}
+    <div class="alert alert-warning" role="alert">String not saved. Press enter or press submit to commit changes.</div>
+  {{/if}}
+  <form>
+    <div class="form-group">
+      <label for="key">key</label>
+      {{input value=model.string_key id='key' class='form-control' placeholder='Key' enter='save' rows=10}}
+    </div>
+    <div class="form-group">
+      <label for="value">Primary Value</label>
+      {{textarea value=model.primary_value id='primary-value' class='form-control' disabled=true rows=5}}
+    </div>
+    <div class="form-group">
+      <label for="value">Value</label>
+      {{textarea value=model.string_value id='value' class='form-control' placeholder='Value' enter='save' rows=5}}
+    </div>
+    <div class="form-group">
+      <label for="value">Notes</label>
+      {{textarea class='form-control' rows=5 value=model.notes}}
+    </div>
+    <button {{action 'save'}} type="submit" class="btn btn-primary">Submit</button>
+    <button {{action 'delete'}} type="submit" class="btn btn-danger">Delete</button>
+  </form>
+</div>

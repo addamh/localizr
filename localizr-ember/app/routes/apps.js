@@ -8,5 +8,12 @@ export default Ember.Route.extend({
   },
   model(){
     return this.store.findAll('app');
+  },
+  setupController: function(controller, model){
+    controller.set('model', model);
+    Ember.run.schedule('afterRender', this, function () {
+      $(".metismenu").metisMenu();
+    });
+
   }
 });

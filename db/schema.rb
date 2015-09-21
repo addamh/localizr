@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150918025828) do
+ActiveRecord::Schema.define(version: 20150919224538) do
 
   create_table "apps", force: :cascade do |t|
     t.string   "name"
@@ -22,8 +22,10 @@ ActiveRecord::Schema.define(version: 20150918025828) do
   create_table "languages", force: :cascade do |t|
     t.string   "code"
     t.integer  "app_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.boolean  "primary"
+    t.string   "country_code"
   end
 
   add_index "languages", ["app_id"], name: "index_languages_on_app_id"

@@ -1,3 +1,3 @@
 class LocalizedStringSerializer < ActiveModel::Serializer
-  attributes :id, :string_key, :string_value, :language_id, :notes
+  attributes :id, :string_key, :string_value, :language_id, :notes, :primary_value
 end

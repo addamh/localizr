@@ -69,6 +69,6 @@ class Api::V1::LocalizedStringsController < ApplicationController
     end
 
     def localized_strings_params
-      params.require(:localized_string).permit(:string_key, :string_value, :language_id, :notes)
+      params.require(:localized_string).permit(:string_key, :string_value, :language_id, :notes, :country_code)
     end
 end

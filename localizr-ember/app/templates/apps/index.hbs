@@ -1,0 +1,25 @@
+<div class="col-md-12">
+  <h2>Apps</h2>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="row">
+    {{#each model as |app|}}
+      {{#link-to 'apps.detail' app.id}}
+        <div class="col-lg-4">
+          <div style='height: 150px;' class='app-box'>
+            <h4>{{app.name}}</h4>
+            Languages: {{app.languages.length}}
+            <ul class="f32">
+              {{#each app.languages as |language|}}
+                <li>
+                  {{#link-to 'apps.language' app.id language.id}}<i class='flag {{language.country_code}}'></i>{{/link-to}}
+                </li>
+              {{/each}}
+            </ul>
+          </div>
+        </div>
+      {{/link-to}}
+    {{/each}}
+  </div>
+</div>

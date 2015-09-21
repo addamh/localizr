@@ -4,7 +4,9 @@ Rails.application.routes.draw do
     namespace :v1 do
       get :csrf, to: 'csrf#index'
       resources :apps
-      resources :languages
+      resources :languages do
+        post :import, to: 'languages#import'
+      end
       resources :localized_strings, path: '/strings'
     end
   end

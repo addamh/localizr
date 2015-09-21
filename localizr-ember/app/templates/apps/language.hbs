@@ -5,7 +5,22 @@
   <div class="col-lg-5">
     <button style='float: right;margin-top: 20px;margin-bottom: 10px;' {{action 'delete'}} type="submit" class="btn btn-danger">Delete</button>
     {{#unless model.primary}}<button style='float: right;margin-top: 20px;margin-bottom: 10px;margin-right: 10px;' {{action 'makePrimary'}} type="submit" class="btn btn-warning">Make Primary</button>{{/unless}}
-    <button style='float: right;margin-top: 20px;margin-bottom: 10px;margin-right: 10px;' {{action 'uploadFile'}} type="submit" class="btn btn-primary">Upload</button>
+    <button style='float: right;margin-top: 20px;margin-bottom: 10px;margin-right: 10px;' {{action 'uploadFile'}} type="submit" class="btn btn-primary">Import</button>
+
+    <div id='import-file' class="modal fade">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Import Language File</h4>
+          </div>
+          <div class="modal-body">
+            {{file-upload app_id=app.id language_id=model.id}}
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
     <div style='float: right;margin-top: 20px;margin-bottom: 10px;margin-right: 10px;' class="btn-group">
       <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Export <span class="caret"></span>
       </button>
@@ -35,7 +50,7 @@
   <hr/>
 
 {{#if model.localized_strings}}
-  <div class='columns col-md-5 panel' style='padding: 15px;'>
+  <div class='columns col-md-6 panel' style='padding: 15px;'>
     <table class="table table-striped">
       <thead>
         <tr><td>Key</td><td>Value</td></tr>
@@ -50,11 +65,11 @@
       </tbody>
     </table>
   </div>
+  <div class='columns col-md-6'>
+    {{outlet}}
+  </div>
     {{else}}
       <div class='columns col-md-12 text-center'>
         <h1>No Strings</h1>
       </div>
   {{/if}}
-  <div class='columns col-md-7'>
-    {{outlet}}
-  </div>

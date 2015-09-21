@@ -21,7 +21,8 @@ export default Ember.Controller.extend({
   }),
   actions: {
     uploadFile: function(){
-
+      $('#import-file').modal('show');
+      this.get('model.localized_strings').reload();
     },
     makePrimary: function(){
       this.store.find('app', this.get('model').get('app_id')).then(function(r){

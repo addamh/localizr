@@ -37,22 +37,7 @@
     </div>
   </nav>
 
-  <div id="page-wrapper" class="gray-bg dashbard-1">
+  <div id="page-wrapper" class="gray-bg clearfix">
     {{outlet}}
   </div>
 </div>
-
-<!-- <div style='border:3px solid green;margin:5px;'>
-  <h3>Apps</h3>
-  <ul>
-  {{#each model as |app|}}
-    <li>
-      {{#link-to 'apps.detail' app.id}}{{app.name}}{{/link-to}}
-    </li>
-  {{/each}}
-  </ul>
-  <hr/>
-  <h5>Add New App</h5>
-  {{input value=newApp enter='newApp'}}
-  {{outlet}}
-</div> -->

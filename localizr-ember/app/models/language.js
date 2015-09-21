@@ -5,7 +5,7 @@ export default DS.Model.extend({
   code: DS.attr('string'),
   country_code: DS.attr('string'),
   primary: DS.attr(),
-  localized_strings: DS.hasMany('localized_strings'),
+  localized_strings: DS.hasMany('localized_strings', { async: false }),
   parent_app: DS.belongsTo('language'),
   chartId: Ember.computed('code', function() {
     return 'language-chart-' + this.get('code') + "-" + this.get('country_code');

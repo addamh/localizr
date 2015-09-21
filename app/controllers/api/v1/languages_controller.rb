@@ -1,6 +1,25 @@
 class Api::V1::LanguagesController < ApplicationController
   before_action :set_language, only: [:show, :edit, :update, :destroy]
 
+  def import
+    @language = Language.find params[:language_id]
+    locale_file = params[:file]
+    file = File.read(locale_file.path)
+    locale_object = JSON.parse(file)
+    locale_object.each do |tk,tv|
+      if tv.is_a? String
+        @language.localized_strings << LocalizedString.new({string_key: tk, string_value: tv})
+      else
+        tv.each do |k,v|
+          if v.is_a? String
+            @language.localized_strings << LocalizedString.new({string_key: "#{tk}.#{k}", string_value: v})
+          end
+        end
+      end
+    end
+    render json: {success: true}
+  end
+
   def index
     @language = Language.all
   end
